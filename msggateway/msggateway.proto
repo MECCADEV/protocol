@@ -86,6 +86,13 @@ message KickUserOfflineReq {
 
 message KickUserOfflineResp {}
 
+// KickTokenOffline is intentionally token-scoped.  Unlike KickUserOffline it
+// must never evict another device sharing the same OpenIM platform ID.
+message KickTokenOfflineReq {
+  repeated string tokens = 1;
+}
+message KickTokenOfflineResp {}
+
 message MultiTerminalLoginCheckReq {
   string userID = 1;
   int32 platformID = 2;
@@ -99,5 +106,6 @@ service msgGateway {
   rpc OnlineBatchPushOneMsg(OnlineBatchPushOneMsgReq) returns (OnlineBatchPushOneMsgResp);
   rpc SuperGroupOnlineBatchPushOneMsg(OnlineBatchPushOneMsgReq) returns (OnlineBatchPushOneMsgResp);
   rpc KickUserOffline(KickUserOfflineReq) returns (KickUserOfflineResp);
+	 rpc KickTokenOffline(KickTokenOfflineReq) returns (KickTokenOfflineResp);
   rpc MultiTerminalLoginCheck(MultiTerminalLoginCheckReq) returns (MultiTerminalLoginCheckResp);
 }

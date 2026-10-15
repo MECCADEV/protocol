@@ -415,6 +415,9 @@ message ModifyMessageReq {
   int64 seq = 2;
   string newContent = 3;
   string oldContent = 4;
+  // The original sender whose message is being edited. Admin callers may
+  // supply this explicitly; normal callers are constrained to their token.
+  string userID = 5;
 }
 
 message ModifyMessageResp {
